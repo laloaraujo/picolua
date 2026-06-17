@@ -1,65 +1,151 @@
-# Minimal Lua on RP2040
+# PicoLua-RP2040
+
+An extended version of PicoLua for the RP2040 microcontroller, featuring enhanced peripheral support and Arduino-inspired APIs.
+
+## Overview
+
+PicoLua-RP2040 is a lightweight Lua interpreter for the Raspberry Pi Pico and other RP2040-based boards. This project extends the original PicoLua with additional functionality aimed at embedded applications, rapid prototyping, and educational use.
+
+## Features
+
+### Advanced GPIO
+
+- Digital input and output configuration
+
+- Internal pull-up support
+
+- Internal pull-down support
+
+- Fast GPIO state toggling (`toggle`)
+
+- Arduino-style aliases and API compatibility
+
+### PWM
+
+- Full PWM support
+
+- Frequency configuration
+
+- Duty cycle control
+
+- Multiple independent PWM channels
+
+### Analog Input
+
+- ADC channel reading
+
+- Voltage measurement
+
+- Internal RP2040 temperature sensor access
+
+### Timing
+
+- Millisecond counter (`millis`)
+
+- Microsecond counter (`micros`)
+
+- Precise delay functions
+
+### Arduino Compatibility
+
+Familiar function names and aliases to simplify migration from Arduino-based projects.
 
 ## Dependencies
 
-    sudo apt update
-    sudo apt install build-essential gcc-arm-none-eabi git cmake python3 tio
+```bash
+sudo apt update
+sudo apt install build-essential gcc-arm-none-eabi git cmake python3 tio
 
-    git clone https://github.com/JeremyGrosser/picolua
-    cd picolua
+git clone https://github.com/laloaraujo/PicoLua-RP2040.git
+cd PicoLua-RP2040
+```
 
 ## Build
 
-    mkdir build
-    cd build
-    cmake ..
-    make
+```bash
+mkdir build
+cd build
+
+cmake ..
+make
+```
 
 ## Run
 
-Hold BOOTSEL button, connect USB.
+Hold the **BOOTSEL** button while connecting the board via USB.
 
-    sudo cp picolua.uf2 /dev/disk/by-label/RPI-RP2
-    tio -b 115200 /dev/ttyACM0
+```bash
+sudo cp picolua.uf2 /dev/disk/by-label/RPI-RP2
+tio -b 115200 /dev/ttyACM0
+```
 
-## Usage
+## REPL Usage
 
-    Ctrl-C  Clear buffer
-    Ctrl-D  Execute buffer
-    Ctrl-L  Clear screen
+```text
+Ctrl-C  Clear buffer
+Ctrl-D  Execute buffer
+Ctrl-L  Clear screen
+```
 
-## Examples
+## Example
 
-    lua> print("hello lua")
-    <Ctrl-D>
-    hello lua
-    lua> a=2
-    b=2
-    print(a*b)
-    <Ctrl-D>
-    4
+```lua
+set_output(25, true)
+for i = 1, 10 do
+  set_pin(25, true)
+  sleep_ms(500)
+  set_pin(25, false)
+  sleep_ms(500)
+end
+```
 
-## Binding to Pico SDK
-A few simple bindings for SDK functions have been added as examples. Here we turn the LED on:
+## PWM Example
 
-    lua> LED=25
-    set_output(LED, true)
-    set_pin(LED, true)
-    <Ctrl-D>
+```lua
+pwm_init(25, 1000)
+pwm_set_duty(25, 80)
+sleep_ms(2000)
+pwm_set_duty(25, 20)
+sleep_ms(2000)
+pwm_set_duty(25, 0)
+```
 
-Blinking is an exercise left to the reader.
+## Temperature Sensor Example
 
-The `bootsel()` function will reset the chip for reflashing as if you'd held down the BOOTSEL button.
+```lua
+print("Temperature:", adc_read_temp())
+```
 
 ## Notes
 
-The lua-5.4.6 distribution is copied from the release source tarball with the following modifications:
-- Added src/CMakeLists.txt, which lists all of the .c files except lua.c and luac.c
-- Changed `LUA_32BITS` to `1` in luaconf.h
+The Lua 5.5.0 distribution included in this repository was copied from the official release source tarball with the following modifications:
 
-## References
+- Added `src/CMakeLists.txt` listing all Lua source files except `lua.c` and `luac.c`
 
-- [Getting Started with Raspberry Pi Pico](https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf)
-- [Raspberry Pi Pico C/C++ SDK](https://datasheets.raspberrypi.com/pico/raspberry-pi-pico-c-sdk.pdf)
-- [Lua 5.4 Reference Manual](https://www.lua.org/manual/5.4/manual.html)
-- [Programming in Lua](https://www.lua.org/pil/)
+- Changed `LUA_32BITS` to `1` in `luaconf.h`
+
+## Supported Hardware
+
+- Raspberry Pi Pico
+
+- Other RP2040-based boards
+
+## Project Goals
+
+- Make embedded programming more accessible
+
+- Provide a lightweight alternative to MicroPython
+
+- Enable low-level hardware access through Lua
+
+- Serve as an educational platform for embedded systems development
+
+## Credits
+
+Based on the original PicoLua project by Jeremy Grosser.
+
+RP2040 extensions and enhancements by Eduardo Araujo.
+
+## License
+
+This project follows the license terms of the original PicoLua project unless otherwise stated.
