@@ -345,12 +345,12 @@ int main() {
             status = luaL_loadbuffer(L, s, len, "picolua");
             if(status != LUA_OK) {
                 const char *msg = lua_tostring(L, -1);
-                lua_writestringerror("parse error: %s\n", msg);
+                fprintf(stderr, "parse error: %s\n", msg);
             }else{
                 status = lua_pcall(L, 0, 0, 0);
                 if(status != LUA_OK) {
                     const char *msg = lua_tostring(L, -1);
-                    lua_writestringerror("execute error: %s\n", msg);
+                    fprintf(stderr, "execute error: %s\n", msg);
                 }
             }
 
