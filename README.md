@@ -1,5 +1,9 @@
 # PicoLua-RP2040
 
+<p align="center">
+  <img src="picolua.png" width="300">
+</p>
+
 An extended version of PicoLua for the RP2040 microcontroller, featuring enhanced peripheral support and Arduino-inspired APIs.
 
 ## Overview
