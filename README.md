@@ -60,8 +60,8 @@ Familiar function names and aliases to simplify migration from Arduino-based pro
 sudo apt update
 sudo apt install build-essential gcc-arm-none-eabi git cmake python3 tio
 
-git clone https://github.com/laloaraujo/PicoLua-RP2040.git
-cd PicoLua-RP2040
+git clone https://github.com/laloaraujo/picolua.git
+cd picolua
 ```
 
 ## Build
