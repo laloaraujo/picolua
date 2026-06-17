@@ -118,7 +118,7 @@ print("Temperature:", adc_read_temp())
 
 ## Notes
 
-The Lua 5.5.0 distribution included in this repository was copied from the official release source tarball with the following modifications:
+The Lua 5.4.6 distribution included in this repository was copied from the official release source tarball with the following modifications:
 
 - Added `src/CMakeLists.txt` listing all Lua source files except `lua.c` and `luac.c`
 
