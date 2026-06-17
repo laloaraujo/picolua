@@ -1,2 +1,17 @@
 *.swp
 build
+# Lua source desnecessário
+lua-5.5.0/testes/
+lua-5.5.0/manual/
+lua-5.5.0/src/ltests.c
+lua-5.5.0/src/ltests.h
+lua-5.5.0/src/onelua.c
+lua-5.5.0/src/lua.c
+
+# Lua - arquivos desnecessários no Pico
+lua-5.5.0/testes/
+lua-5.5.0/manual/
+lua-5.5.0/src/ltests.c
+lua-5.5.0/src/ltests.h
+lua-5.5.0/src/onelua.c
+lua-5.5.0/src/lua.c
